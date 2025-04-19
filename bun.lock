@@ -5,6 +5,8 @@
       "name": "simple-subs",
       "dependencies": {
         "ky": "1.7.5",
+        "nanoid": "5.1.5",
+        "neverthrow": "8.2.0",
         "typed-htmx": "0.3.1",
         "zod": "3.24.2",
       },
@@ -35,6 +37,8 @@
     "@pact-foundation/pact-core-linux-x64-musl": ["@pact-foundation/pact-core-linux-x64-musl@16.0.0", "", { "os": "linux", "cpu": "x64" }, "sha512-C9b+lhYrwpn96USpeWNNZrbOoaMKo7/JqFoL81V9QQFmUawZOZNhp1i5HbznM35Apk2QdLM73P2DESUryVJ4ng=="],
 
     "@pact-foundation/pact-core-windows-x64": ["@pact-foundation/pact-core-windows-x64@16.0.0", "", { "os": "win32", "cpu": "x64" }, "sha512-/6d0bjouofuSCWM2wauAf7+tD2AG+y5X0duchkj0vpjBdYG7tbgEB322QcyTWBi7na4plEdLSdIMnfZs6faEqA=="],
+
+    "@rollup/rollup-linux-x64-gnu": ["@rollup/rollup-linux-x64-gnu@4.40.0", "", { "os": "linux", "cpu": "x64" }, "sha512-RcDGMtqF9EFN8i2RYN2W+64CdHruJ5rPqrlYw+cgM3uOVPSsnAQps7cpjXe9be/yDp8UC7VLoCoKC8J3Kn2FkQ=="],
 
     "@types/bun": ["@types/bun@1.2.8", "", { "dependencies": { "bun-types": "1.2.7" } }, "sha512-t8L1RvJVUghW5V+M/fL3Thbxcs0HwNsXsnTEBEfEVqGteiJToOlZ/fyOEaR1kZsNqnu+3XA4RI/qmnX4w6+S+w=="],
 
@@ -224,7 +228,11 @@
 
     "ms": ["ms@2.0.0", "", {}, "sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A=="],
 
+    "nanoid": ["nanoid@5.1.5", "", { "bin": { "nanoid": "bin/nanoid.js" } }, "sha512-Ir/+ZpE9fDsNH0hQ3C68uyThDXzYcim2EqcZ8zn8Chtt1iylPT9xXJB0kPCnqzgcEGikO9RxSrh63MsmVCU7Fw=="],
+
     "negotiator": ["negotiator@0.6.3", "", {}, "sha512-+EUsqGPLsM+j/zdChZjsnX51g4XrHFOIXwfnCVPGlQk/k5giakcKsuxCObBRu6DSm9opw/O6slWbJdghQM4bBg=="],
+
+    "neverthrow": ["neverthrow@8.2.0", "", { "optionalDependencies": { "@rollup/rollup-linux-x64-gnu": "^4.24.0" } }, "sha512-kOCT/1MCPAxY5iUV3wytNFUMUolzuwd/VF/1KCx7kf6CutrOsTie+84zTGTpgQycjvfLdBBdvBvFLqFD2c0wkQ=="],
 
     "node-gyp-build": ["node-gyp-build@4.8.4", "", { "bin": { "node-gyp-build": "bin.js", "node-gyp-build-optional": "optional.js", "node-gyp-build-test": "build-test.js" } }, "sha512-LA4ZjwlnUblHVgq0oBF3Jl/6h/Nvs5fzBLwdEF4nuxnFdsfajde4WfxtJr3CaiH+F6ewcIB/q4jQ4UzPyid+CQ=="],
 
