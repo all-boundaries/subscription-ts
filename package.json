@@ -5,11 +5,18 @@
   "private": true,
   "scripts": {
     "dev": "bun --hot src/server.ts",
-    "test": "bun test"
+    "test": "bun run test:non-dom test:dom",
+    "test:non-dom": "bun test test/non-dom/",
+    "test:dom": "bun test --preload ./test/_setup/happy-dom.ts test/dom/"
   },
   "devDependencies": {
+    "@faker-js/faker": "9.7.0",
+    "@happy-dom/global-registrator": "^17.4.4",
     "@pact-foundation/pact": "15.0.1",
-    "@types/bun": "latest"
+    "@testing-library/dom": "10.4.0",
+    "@types/bun": "latest",
+    "global-jsdom": "26.0.0",
+    "jsdom": "26.1.0"
   },
   "peerDependencies": {
     "typescript": "^5"

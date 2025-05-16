@@ -2,10 +2,10 @@ import { beforeEach, describe, expect, it } from "bun:test";
 import {
   findActiveByUserId,
   save,
-} from "../../src/subscription/subscription-db";
-import { id } from "../../src/plumbling/id-creation";
-import { bootstrapDb } from "../../src/plumbling/db";
-import { SubscriptionErrors } from "../../src/subscription/subscription";
+} from "../../../src/subscription/subscription-db";
+import { id } from "../../../src/plumbling/id-creation";
+import { bootstrapDb } from "../../../src/plumbling/db";
+import { SubscriptionErrors } from "../../../src/subscription/subscription";
 
 describe("db: subscription", () => {
   beforeEach(() => bootstrapDb());

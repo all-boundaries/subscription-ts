@@ -13,7 +13,7 @@ import {
   type Plan,
   productDetailsFor,
   allProducts,
-} from "../src/gateway/product-catalog-gateway";
+} from "../../src/gateway/product-catalog-gateway";
 
 const provider = new PactV4({
   dir: resolve(process.cwd(), "pacts"),

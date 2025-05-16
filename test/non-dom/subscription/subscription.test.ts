@@ -1,12 +1,12 @@
 import { beforeEach, describe, expect, it, spyOn } from "bun:test";
-import { bootstrapDb } from "../../src/plumbling/db";
-import * as sdb from "../../src/subscription/subscription-db.ts";
+import { err } from "neverthrow";
+import { bootstrapDb } from "../../../src/plumbling/db";
+import * as sdb from "../../../src/subscription/subscription-db";
 import {
+  type NewSubscription,
   subscribe,
   SubscriptionErrors,
-  type NewSubscription,
-} from "../../src/subscription/subscription";
-import { err } from "neverthrow";
+} from "../../../src/subscription/subscription";
 
 describe("subscription", () => {
   beforeEach(() => bootstrapDb());

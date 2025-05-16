@@ -1,7 +1,4 @@
-import type { Plan } from "../gateway/product-catalog-gateway";
-import { Plans } from "./plans";
-
-export function Layout(plans: Array<Plan>) {
+export function Layout({ children }: { children: string }) {
   return (
     "<!DOCTYPE html>" +
     (
@@ -15,6 +12,7 @@ export function Layout(plans: Array<Plan>) {
             href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
           />
           <link rel="stylesheet" href="/static/app.css" />
+          <script src="https://unpkg.com/htmx.org@2.0.4"></script>
         </head>
         <body>
           <header class="container">
@@ -23,9 +21,7 @@ export function Layout(plans: Array<Plan>) {
               <p>Something clever about coffee subscription</p>
             </hgroup>
           </header>
-          <main class="container">
-            <Plans plans={plans} />
-          </main>
+          <main class="container">{children}</main>
           <footer class="container text-center">
             <hr />
             <small>2025</small>
