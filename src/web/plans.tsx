@@ -1,4 +1,4 @@
-import type { Plan } from "../gateway/product-catalog-gateway";
+import type { Plan } from "../subscription/plans";
 
 export function Plans({ plans }: { plans: Array<Plan> }) {
   return <section class="grid">{plans.map((p) => PlanCard(p))}</section>;

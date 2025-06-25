@@ -1,5 +1,4 @@
 import type { BunRequest, Serve } from "bun";
-import { allProducts } from "./gateway/product-catalog-gateway";
 import { Layout } from "./web/layout";
 import { z } from "zod";
 import { ResultAsync } from "neverthrow";
@@ -7,6 +6,7 @@ import { subscribe } from "./subscription/subscription";
 import { Subscribed } from "./web/subscribed";
 import { Error } from "./web/error";
 import { Plans } from "./web/plans";
+import { allPlans } from "./subscription/plans";
 
 const subscriptionRequestSchema = z.object({
   planId: z.string(),
@@ -18,7 +18,7 @@ export const serverDefinition: Serve<unknown> = {
   port: 0,
   routes: {
     "/": async () => {
-      const plans = await allProducts();
+      const plans = allPlans();
       return new Response(Layout({ children: Plans({ plans }) }), {
         headers: {
           "content-type": "text/html",
