@@ -1,4 +1,4 @@
-import type { Subscription } from "../subscription/subscription";
+import type { Subscription } from "../subscription";
 
 export function Subscribed({ subscription }: { subscription: Subscription }) {
   return (

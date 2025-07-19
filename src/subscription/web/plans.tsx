@@ -1,4 +1,4 @@
-import type { Plan } from "../subscription/plans";
+import type { Plan } from "../plans";
 
 export function Plans({ plans }: { plans: Array<Plan> }) {
   return <section class="grid">{plans.map((p) => PlanCard(p))}</section>;

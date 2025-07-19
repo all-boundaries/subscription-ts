@@ -3,10 +3,10 @@ import { Layout } from "./web/layout";
 import { z } from "zod";
 import { ResultAsync } from "neverthrow";
 import { subscribe } from "./subscription/subscription";
-import { Subscribed } from "./web/subscribed";
 import { Error } from "./web/error";
-import { Plans } from "./web/plans";
 import { allPlans } from "./subscription/plans";
+import { Plans } from "./subscription/web/plans";
+import { Subscribed } from "./subscription/web/subscribed";
 
 const subscriptionRequestSchema = z.object({
   planId: z.string(),
