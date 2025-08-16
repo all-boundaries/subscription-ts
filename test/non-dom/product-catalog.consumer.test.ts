@@ -23,6 +23,19 @@ const provider = new PactV4({
   logLevel: "info",
 });
 
+/**
+ * Defines expected response from Product Catalog when fetching products.
+ *
+ * Application architecture concept:
+ *  - `Gateway --> Client --> Server`
+ *
+ * Test boundary implementation:
+ *  - `productCatlogGateway --> productCatalogClient --> pactServerStub`
+ *  - It tests both the gateway and the client.
+ *
+ * Pact creates a stub server to simulate the response described in the
+ * contract, removing the need of us manually creating a stub.
+ */
 describe("GET /products/:id", () => {
   test("returns info about a product", async () => {
     const response: Plan = {

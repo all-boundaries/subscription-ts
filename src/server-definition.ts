@@ -13,7 +13,7 @@ const subscriptionRequestSchema = z.object({
   userId: z.string(),
 });
 
-export const serverDefinition: Serve<unknown> = {
+export const serverDefinition = {
   hostname: "localhost",
   port: 0,
   routes: {

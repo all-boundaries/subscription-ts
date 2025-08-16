@@ -2,10 +2,10 @@
 
 import { describe, expect, it } from "bun:test";
 import { screen, within } from "@testing-library/dom";
-import { Plans } from "../../src/web/plans";
 import type { Plan } from "../../src/gateway/product-catalog-gateway";
 import { faker } from "@faker-js/faker";
 import { render } from "../_setup/render";
+import { Plans } from "../../src/subscription/web/plans";
 
 describe("web: plans", () => {
   it("displays the plan information for subscription with action to subscribe", () => {
