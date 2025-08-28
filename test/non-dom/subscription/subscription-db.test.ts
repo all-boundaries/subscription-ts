@@ -7,6 +7,19 @@ import { id } from "../../../src/plumbling/id-creation";
 import { bootstrapDb } from "../../../src/plumbling/db";
 import { SubscriptionErrors } from "../../../src/subscription/subscription";
 
+/**
+ * Ensures the queries returns what's expected.
+ *
+ * Application architecture concept:
+ *   - `QueryFn -> StorageClient -> Storage System`
+ *
+ * Test boundary implementation:
+ *   - `findActiveByUserId -> db -> database`
+ *
+ * 1. A real database is used (only for the tests).
+ * 2. Data is added to simulate the desired scenario.
+ * 3. The query function is executed against the database.
+ */
 describe("db: subscription", () => {
   beforeEach(() => bootstrapDb());
 

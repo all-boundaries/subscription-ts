@@ -7,6 +7,20 @@ import { faker } from "@faker-js/faker";
 import { render } from "../_setup/render";
 import { Plans } from "../../src/subscription/web/plans";
 
+/**
+ * Ensures the plans page has the expected information
+ *
+ * Application architecture concept:
+ *   - `Browser -> Page`
+ *
+ * Test boundary implementation:
+ *   - `Expected Data -> RenderFn -> Page`
+ *
+ * 1. The page structure is the focus.
+ * 2. The expected data is provided.
+ * 3. Render the page with the data provided.
+ * 4. Assertions check if the data is displayed in the appropriate place.
+ */
 describe("web: plans", () => {
   it("displays the plan information for subscription with action to subscribe", () => {
     const plan1 = planBuilder();

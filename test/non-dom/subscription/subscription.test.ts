@@ -8,6 +8,20 @@ import {
   SubscriptionErrors,
 } from "../../../src/subscription/subscription";
 
+/**
+ * Ensures the rules of subscriptions behaves as expected.
+ *
+ * Application architecture concept:
+ *  - `DomainFn -> [DomainFn] -> Dependencies`
+ *
+ * Test boundary implementation:
+ *  - `subscribe -> db -> Database`
+ *  - `subscribe -> db(mock)`
+ *
+ * 1. The domain logic is the focus.
+ * 2. A real database may be used.
+ * 3. A mock for the database client may be used.
+ */
 describe("subscription", () => {
   beforeEach(() => bootstrapDb());
 
