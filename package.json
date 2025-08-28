@@ -10,22 +10,22 @@
     "test:dom": "bun test --preload ./test/_setup/happy-dom.ts test/dom/"
   },
   "devDependencies": {
-    "@faker-js/faker": "9.7.0",
-    "@happy-dom/global-registrator": "^17.4.4",
+    "@faker-js/faker": "10.0.0",
+    "@happy-dom/global-registrator": "^18.0.1",
     "@pact-foundation/pact": "15.0.1",
-    "@testing-library/dom": "10.4.0",
-    "@types/bun": "latest",
+    "@testing-library/dom": "10.4.1",
+    "@types/bun": "^1.2.21",
     "global-jsdom": "26.0.0",
     "jsdom": "26.1.0"
   },
   "peerDependencies": {
-    "typescript": "^5"
+    "typescript": "^5.9.2"
   },
   "dependencies": {
-    "ky": "1.7.5",
+    "ky": "1.9.1",
     "nanoid": "5.1.5",
     "neverthrow": "8.2.0",
     "typed-htmx": "0.3.1",
-    "zod": "3.24.2"
+    "zod": "4.1.4"
   }
 }
