@@ -1,6 +1,35 @@
 # Structure
 
+## User interacting with the application
+
+> **Boundary**: Browser -> HTTP
+
+```mermaid
+flowchart LR
+    user("User") -->|accesses| web
+    user -->|views| subscription_plans
+    user -->|clicks| subscribe_button
+
+    subgraph browser
+        subgraph web [Subscription Website]
+            subscription_plans("Subscription Plans<br/><em>(html page)</em>")
+            subscribe_button("Subscribe<br/><em>(button)</em>")
+        end
+    end
+
+    subgraph app [Subscription app]
+        subgraph http ["server-definition.ts"]
+            web --> index["handler for<br/>GET /"]
+            subscribe_button --> subscribe["handler for<br/>POST /subscriptions"]
+        end
+    end
+
+style http fill:#53AFDC,stroke:#FFFFFF,stroke-width:1px
+```
+
 ## Communication with external services
+
+> **Boundary**: Domain -> External Service
 
 ```mermaid
 flowchart LR
@@ -16,6 +45,8 @@ style gateway fill:#53AFDC,stroke:#FFFFFF,stroke-width:1px
 ```
 
 ## Communication with storage systems
+
+> **Boundary**: Domain -> Storage
 
 ```mermaid
 flowchart LR
