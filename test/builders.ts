@@ -7,9 +7,6 @@ export function planBuilder(overwrites?: Partial<Plan>): Plan {
     id: faker.helpers.fromRegExp("[a-d0-6]{5,10}"),
     name: faker.commerce.productName(),
     description: faker.commerce.productDescription(),
-    status: faker.helpers.arrayElement(["active", "inactive"]),
-    specs: [],
-    tags: [],
     ...overwrites,
   };
 }
