@@ -5,7 +5,7 @@ import * as subscription from "../../src/subscription/subscription.ts";
 import * as plan from "../../src/subscription/plans.ts";
 import { err, ok } from "neverthrow";
 import { parseHTML } from "linkedom";
-import { planBuilder, subscriptionBuilder } from "../builders.ts";
+import { aPlan, aSubscription } from "../builders.ts";
 
 /**
  * Ensures the server returns the appropriate responses.
@@ -30,7 +30,7 @@ describe("web: routes", () => {
   afterAll(() => server.stop());
 
   it("displays available subscriptions plans", async () => {
-    spyOn(plan, "allPlans").mockReturnValueOnce([planBuilder(), planBuilder()]);
+    spyOn(plan, "allPlans").mockReturnValueOnce([aPlan(), aPlan()]);
     const response = await fetch(new URL("/", server.url));
 
     const body = await response.text();
@@ -43,9 +43,7 @@ describe("web: routes", () => {
   });
 
   it("displays congratulations page after successful subscription", async () => {
-    spyOn(subscription, "subscribe").mockReturnValueOnce(
-      ok(subscriptionBuilder()),
-    );
+    spyOn(subscription, "subscribe").mockReturnValueOnce(ok(aSubscription()));
 
     const form = new FormData();
     form.append("planId", "pln-example1");

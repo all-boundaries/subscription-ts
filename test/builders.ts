@@ -2,7 +2,7 @@ import { faker } from "@faker-js/faker";
 import type { Subscription } from "../src/subscription/subscription";
 import type { Plan } from "../src/subscription/plans";
 
-export function planBuilder(overwrites?: Partial<Plan>): Plan {
+export function aPlan(overwrites?: Partial<Plan>): Plan {
   return {
     id: faker.helpers.fromRegExp("[a-d0-6]{5,10}"),
     name: faker.commerce.productName(),
@@ -11,7 +11,7 @@ export function planBuilder(overwrites?: Partial<Plan>): Plan {
   };
 }
 
-export function subscriptionBuilder(
+export function aSubscription(
   overwrites?: Partial<Subscription>,
 ): Subscription {
   const startDate = faker.date.soon();

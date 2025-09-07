@@ -4,7 +4,7 @@ import { describe, expect, it } from "bun:test";
 import { screen, within } from "@testing-library/dom";
 import { render } from "../_setup/render";
 import { Plans } from "../../src/subscription/web/plans-page";
-import { planBuilder } from "../builders";
+import { aPlan } from "../builders";
 
 /**
  * Ensures the plans page has the expected information
@@ -22,8 +22,8 @@ import { planBuilder } from "../builders";
  */
 describe("web: plans", () => {
   it("renders the plan information for subscription with action to subscribe", () => {
-    const plan1 = planBuilder();
-    const plan2 = planBuilder();
+    const plan1 = aPlan();
+    const plan2 = aPlan();
     const plans = [plan1, plan2];
 
     const component = Plans({ plans });
