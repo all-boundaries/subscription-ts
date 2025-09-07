@@ -7,7 +7,20 @@ import { err, ok } from "neverthrow";
 import { parseHTML } from "linkedom";
 import { planBuilder, subscriptionBuilder } from "../builders.ts";
 
-describe("web: subscribe", () => {
+/**
+ * Ensures the server returns the appropriate responses.
+ *
+ * Application architecture concept:
+ *   - `User/Browser -> HttpServer -> Domain`
+ *
+ * Test boundary implementation:
+ *   - `route -> mock(domain)`
+ *
+ * 1. A real call to the route.
+ * 2. Mock return from the domain logic.
+ * 3. Check if the HTTP server returns the expected output.
+ */
+describe("web: routes", () => {
   let server: Bun.Server;
 
   beforeAll(() => {
@@ -72,7 +85,7 @@ describe("web: subscribe", () => {
     const body = await response.text();
     const { document } = parseHTML(body);
 
-    expect(response.status).toEqual(400);
+    expect(response.status).toEqual(200);
     expect(document.querySelector("h2")?.textContent).toEqual(
       "Something went wrong",
     );

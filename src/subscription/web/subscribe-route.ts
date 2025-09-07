@@ -36,7 +36,6 @@ export async function subscribeToPlan(req: BunRequest<"/subscriptions">) {
         new Response(
           Layout({ children: Error({ error: JSON.stringify(error) }) }),
           {
-            status: 400,
             headers: { "content-type": "text/html" },
           },
         ),
