@@ -2,10 +2,9 @@
 
 import { describe, expect, it } from "bun:test";
 import { screen, within } from "@testing-library/dom";
-import type { Plan } from "../../src/gateway/product-catalog-gateway";
-import { faker } from "@faker-js/faker";
 import { render } from "../_setup/render";
-import { Plans } from "../../src/subscription/web/plans";
+import { Plans } from "../../src/subscription/web/plans-page";
+import { planBuilder } from "../builders";
 
 /**
  * Ensures the plans page has the expected information
@@ -22,7 +21,7 @@ import { Plans } from "../../src/subscription/web/plans";
  * 4. Assertions check if the data is displayed in the appropriate place.
  */
 describe("web: plans", () => {
-  it("displays the plan information for subscription with action to subscribe", () => {
+  it("renders the plan information for subscription with action to subscribe", () => {
     const plan1 = planBuilder();
     const plan2 = planBuilder();
     const plans = [plan1, plan2];
@@ -54,15 +53,3 @@ describe("web: plans", () => {
     }
   });
 });
-
-function planBuilder(overwrites?: Partial<Plan>): Plan {
-  return {
-    id: faker.helpers.fromRegExp("[a-d0-6]{5,10}"),
-    name: faker.commerce.productName(),
-    description: faker.commerce.productDescription(),
-    status: faker.helpers.arrayElement(["active", "inactive"]),
-    specs: [],
-    tags: [],
-    ...overwrites,
-  };
-}

@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "ky": "1.9.1",
+    "linkedom": "^0.18.12",
     "nanoid": "5.1.5",
     "neverthrow": "8.2.0",
     "typed-htmx": "0.3.1",
