@@ -1,5 +1,6 @@
 import { faker } from "@faker-js/faker";
 import type { Subscription } from "../src/subscription/subscription";
+import type { Plan } from "../src/subscription/plans";
 
 export function planBuilder(overwrites?: Partial<Plan>): Plan {
   return {
