@@ -16,6 +16,9 @@ jobs:
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
 
+      - name: Install dependencies
+        run: bun install
+
       - name: Run DOM specific tests
         run: bun run test:dom --reporter=junit --reporter-outfile=./junit-dom.xml
 
