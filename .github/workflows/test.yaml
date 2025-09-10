@@ -7,7 +7,7 @@ on:
 
 jobs:
   test:
-    name: test
+    name: Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -32,3 +32,29 @@ jobs:
           name: Tests Results
           path: junit-*.xml
           reporter: java-junit
+
+  build_release:
+    name: Build and Release
+    runs-on: ubuntu-latest
+    needs: [test]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Create artifact
+        run: bun build --compile --outfile=subscription src/server.ts
+
+      - name: blah
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Subscription
+          tag_name: latest
+          files: subscription
+          overwrite_files: true
