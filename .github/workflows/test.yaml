@@ -1,0 +1,26 @@
+name: 🧪 Test
+
+jobs:
+  test:
+    name: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Run DOM specific tests
+        run: bun run test:dom --reporter=junit --reporter-outfile=./junit-dom.xml
+
+      - name: Run non-DOM specific tests
+        run: bun run test:non-dom --reporter=junit --reporter-outfile=./junit-nondom.xml
+
+      - name: Test report
+        uses: dorny/test-reporter@v1
+        if: success() || failure()
+        with:
+          name: Tests Results
+          path: junit-*.xml
+          reporter: jest-junit
