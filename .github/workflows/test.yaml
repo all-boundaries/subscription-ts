@@ -26,7 +26,7 @@ jobs:
         run: bun run test:non-dom --reporter=junit --reporter-outfile=./junit-nondom.xml
 
       - name: Test report
-        uses: dorny/test-reporter@v1
+        uses: dorny/test-reporter@v2
         if: success() || failure()
         with:
           name: Tests Results
