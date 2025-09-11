@@ -26,7 +26,7 @@ jobs:
         run: bun run test:non-dom --reporter=junit --reporter-outfile=./junit-nondom.xml
 
       - name: Run closed-box tests (install playwright)
-        run: bunx playwright install --with-deps chromium
+        run: bunx playwright install chromium
 
       - name: Run closed-box tests (actual test)
         run: bunx playwright test
