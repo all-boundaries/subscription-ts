@@ -26,12 +26,23 @@ jobs:
         run: bun run test:non-dom --reporter=junit --reporter-outfile=./junit-nondom.xml
 
       - name: Test report
-        uses: dorny/test-reporter@v2
-        if: success() || failure()
+        uses: ctrf-io/github-test-reporter@v1
+        if: always()
         with:
-          name: Tests Results
-          path: junit-*.xml
-          reporter: java-junit
+          report-path: ./junit-*.xml
+          integrations-config: |
+            {
+              "junit-to-ctrf": {
+                "enabled": true,
+                "action": "convert",
+                "options": {
+                  "output": "./ctrf-reports/ctrf-report.json",
+                  "toolname": "junit-to-ctrf",
+                  "useSuiteName": false,
+                }
+              }
+            }
+          github-report: true
 
   build_release:
     name: Build and Release
