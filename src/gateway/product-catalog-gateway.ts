@@ -1,5 +1,5 @@
 import ky from "ky";
-import { envConfig } from "../env-config";
+import { envConfig } from "../plumbling/env-config";
 
 export type Plan = {
   id: string;

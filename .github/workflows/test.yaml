@@ -25,6 +25,12 @@ jobs:
       - name: Run non-DOM specific tests
         run: bun run test:non-dom --reporter=junit --reporter-outfile=./junit-nondom.xml
 
+      - name: Run closed-box tests (install playwright)
+        run: bunx playwright install
+
+      - name: Run closed-box tests (actual test)
+        run: bunx playwright test
+
       - name: Test report
         uses: ctrf-io/github-test-reporter@v1
         if: always()

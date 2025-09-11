@@ -35,3 +35,9 @@ report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
 
 ## app specific
 pacts
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

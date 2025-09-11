@@ -17,7 +17,9 @@ export function Layout({ children }: { children: string }) {
         <body>
           <header class="container">
             <hgroup>
-              <h1>Subscription</h1>
+              <a href="/">
+                <h1>Subscription</h1>
+              </a>
               <p>Something clever about coffee subscription</p>
             </hgroup>
           </header>

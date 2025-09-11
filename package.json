@@ -12,11 +12,13 @@
     "@faker-js/faker": "10.0.0",
     "@happy-dom/global-registrator": "^18.0.1",
     "@pact-foundation/pact": "15.0.1",
+    "@playwright/test": "^1.55.0",
     "@testing-library/dom": "10.4.1",
     "@testing-library/jest-dom": "^6.8.0",
     "@types/bun": "^1.2.21",
     "global-jsdom": "26.0.0",
-    "jsdom": "26.1.0"
+    "jsdom": "26.1.0",
+    "playwright-ctrf-json-reporter": "0.0.23"
   },
   "peerDependencies": {
     "typescript": "^5.9.2"
