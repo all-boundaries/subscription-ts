@@ -32,7 +32,7 @@ jobs:
         run: bunx playwright test
 
       - name: Upload closed-box full test report
-      - uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
         with:
           name: playwright-report
