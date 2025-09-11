@@ -50,8 +50,8 @@ jobs:
         if: always()
         with:
           report-path: "./ctrf/*.json"
-          test-report: true
-          failed-report: true
+          suite-folded-report: true
+          failed-folded-report: true
 
   build_release:
     name: Build and Release
