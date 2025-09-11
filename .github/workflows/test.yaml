@@ -42,7 +42,8 @@ jobs:
                 }
               }
             }
-          github-report: true
+          test-report: true
+          failed-report: true
 
   build_release:
     name: Build and Release
