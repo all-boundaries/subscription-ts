@@ -26,10 +26,13 @@ jobs:
         run: bun run test:non-dom --reporter=junit --reporter-outfile=./junit-nondom.xml
 
       - name: Run closed-box tests (install playwright)
-        run: bunx playwright install
+        run: bunx playwright install --with-deps chromium
 
       - name: Run closed-box tests (actual test)
         run: bunx playwright test
+
+      - name: Convert test report (JUnit to CTRF)
+        run: bunx junit-to-ctrf "./junit-*.xml" --tool bun --o ctrf/ctrf-report-bun.json
 
       - name: Upload closed-box full test report
         uses: actions/upload-artifact@v4
@@ -39,23 +42,14 @@ jobs:
           path: playwright-report/
           retention-days: 5
 
+      - name: Combine test reports
+        run: bunx ctrf merge ./ctrf
+
       - name: Test report
         uses: ctrf-io/github-test-reporter@v1
         if: always()
         with:
-          report-path: ./junit-*.xml
-          integrations-config: |
-            {
-              "junit-to-ctrf": {
-                "enabled": true,
-                "action": "convert",
-                "options": {
-                  "output": "./ctrf-reports/ctrf-report.json",
-                  "toolname": "junit-to-ctrf",
-                  "useSuiteName": false
-                }
-              }
-            }
+          report-path: "./ctrf/*.json"
           test-report: true
           failed-report: true
 
