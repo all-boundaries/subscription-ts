@@ -31,6 +31,14 @@ jobs:
       - name: Run closed-box tests (actual test)
         run: bunx playwright test
 
+      - name: Upload closed-box full test report
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 5
+
       - name: Test report
         uses: ctrf-io/github-test-reporter@v1
         if: always()
