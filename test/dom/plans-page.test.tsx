@@ -20,7 +20,7 @@ import { aPlan } from "../builders";
  * 3. Render the page with the data provided.
  * 4. Assertions check if the data is displayed in the appropriate place.
  */
-describe("web: plans", () => {
+describe("component: plans", () => {
   it("renders the plan information for subscription with action to subscribe", () => {
     const plan1 = aPlan();
     const plan2 = aPlan();
