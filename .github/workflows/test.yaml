@@ -65,7 +65,9 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          name: Subscription
+          name: latest
           tag_name: latest
           files: subscription
           overwrite_files: true
+          make_latest: "true"
+          body: The latest version of the Subscription app
