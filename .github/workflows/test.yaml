@@ -38,7 +38,7 @@ jobs:
                 "options": {
                   "output": "./ctrf-reports/ctrf-report.json",
                   "toolname": "junit-to-ctrf",
-                  "useSuiteName": false,
+                  "useSuiteName": false
                 }
               }
             }
