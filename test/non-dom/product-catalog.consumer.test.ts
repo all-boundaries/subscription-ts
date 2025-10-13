@@ -1,4 +1,4 @@
-import { describe, expect, test } from "bun:test";
+import { describe, expect, it } from "bun:test";
 import { resolve } from "node:path";
 import process from "node:process";
 import {
@@ -37,7 +37,7 @@ const provider = new PactV4({
  * contract, removing the need of us manually creating a stub.
  */
 describe("GET /products/:id", () => {
-  test("returns info about a product", async () => {
+  it("returns info about a product", async () => {
     const response: Product = {
       id: "prd-2nuschh",
       name: "product 1",
@@ -72,7 +72,7 @@ describe("GET /products/:id", () => {
       });
   });
 
-  test("returns all products", async () => {
+  it("returns all products", async () => {
     const response: Array<Product> = [
       {
         id: "prd-2nuschh",
@@ -113,7 +113,7 @@ describe("GET /products/:id", () => {
       });
   });
 
-  test("returns empty when retrieving all products fails", async () => {
+  it("returns empty when retrieving all products fails", async () => {
     const response = {
       type: "probs/something-went-wrong",
       title: "We do not know what happened, please try again",
