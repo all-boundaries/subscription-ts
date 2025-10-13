@@ -10,10 +10,10 @@ import {
 import ky from "ky";
 import { like } from "@pact-foundation/pact/src/dsl/matchers";
 import {
-  type Plan,
   productDetailsFor,
   allProducts,
 } from "../../src/gateway/product-catalog-gateway";
+import type { Product } from "../../src/subscription/plans";
 
 const provider = new PactV4({
   dir: resolve(process.cwd(), "pacts"),
@@ -38,16 +38,21 @@ const provider = new PactV4({
  */
 describe("GET /products/:id", () => {
   test("returns info about a product", async () => {
-    const response: Plan = {
+    const response: Product = {
+      id: "prd-2nuschh",
+      name: "product 1",
+      description: "description 1",
+      characteristics: ["fruity", "dark"],
+    };
+
+    const bodyMatch = MatchersV3.like({
       id: "prd-2nuschh",
       name: "product 1",
       description: "description 1",
       status: "active",
-      specs: [],
-      tags: [],
-    };
-
-    const bodyMatch = MatchersV3.like(response);
+      specs: ["fruity"],
+      tags: ["dark"],
+    });
 
     await provider
       .addInteraction()
@@ -62,6 +67,47 @@ describe("GET /products/:id", () => {
       .executeTest(async (mockserver: V3MockServer) => {
         const client = ky.create({ prefixUrl: `${mockserver.url}/products` });
         return await productDetailsFor("prd-2nuSChH", client).then((res) => {
+          expect(res).toEqual(response);
+        });
+      });
+  });
+
+  test("returns all products", async () => {
+    const response: Array<Product> = [
+      {
+        id: "prd-2nuschh",
+        name: "product 1",
+        description: "description 1",
+        characteristics: ["fruity", "dark"],
+      },
+    ];
+
+    const bodyMatch = MatchersV3.like({
+      data: [
+        {
+          id: "prd-2nuschh",
+          name: "product 1",
+          description: "description 1",
+          status: "active",
+          specs: ["fruity"],
+          tags: ["dark"],
+        },
+      ],
+    });
+
+    await provider
+      .addInteraction()
+      .given("many products exists")
+      .uponReceiving("retrieve all product")
+      .withRequest("GET", "/products/", (builder) => {
+        builder.headers({ accept: like("application/json") });
+      })
+      .willRespondWith(200, (builder) => {
+        builder.jsonBody(bodyMatch);
+      })
+      .executeTest(async (mockserver: V3MockServer) => {
+        const client = ky.create({ prefixUrl: `${mockserver.url}/products` });
+        return await allProducts(client).then((res) => {
           expect(res).toEqual(response);
         });
       });

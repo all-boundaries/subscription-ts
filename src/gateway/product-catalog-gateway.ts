@@ -1,32 +1,52 @@
 import ky from "ky";
 import { envConfig } from "../plumbling/env-config";
+import z from "zod";
+import type { Product } from "../subscription/plans";
 
-export type Plan = {
-  id: string;
-  name: string;
-  description: string;
-  status: "active" | "inactive";
-  specs: Array<string>;
-  tags: Array<string>;
-};
+const productResponseSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  description: z.string(),
+  status: z.string(),
+  specs: z.array(z.string()),
+  tags: z.array(z.string()),
+});
+
+type ProductResponse = z.infer<typeof productResponseSchema>;
 
 const productCatalogClient = ky.create({
   prefixUrl: `${envConfig.SVC_PRODUCT_CATALOG_URL}/products`,
 });
 
-export async function productDetailsFor(
+async function productDetailsFor(
   id: string,
   client = productCatalogClient,
-): Promise<Plan> {
-  return client.get(id).json<Plan>();
+): Promise<Product> {
+  return client
+    .get(id)
+    .json()
+    .then(productResponseSchema.parse)
+    .then(responseToProduct);
 }
 
-export async function allProducts(
+async function allProducts(
   client = productCatalogClient,
-): Promise<Array<Plan>> {
+): Promise<Array<Product>> {
   return client
     .get("")
-    .json<{ data: Array<Plan> }>()
-    .then((r) => r.data)
+    .json<{ data: Array<ProductResponse> }>()
+    .then((json) => json.data.map((p) => productResponseSchema.parse(p)))
+    .then((response) => response.map(responseToProduct))
     .catch(() => []);
 }
+
+function responseToProduct(response: ProductResponse): Product {
+  return {
+    id: response.id,
+    name: response.name,
+    description: response.description,
+    characteristics: [...response.specs, ...response.tags],
+  };
+}
+
+export { productDetailsFor, allProducts };
