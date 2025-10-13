@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "bun --hot src/server.ts",
     "test:non-dom": "bun test test/non-dom/",
-    "test:dom": "bun test --preload ./test/_setup/happy-dom.ts test/dom/"
+    "test:dom": "bun test --preload ./test/_setup/happy-dom.ts test/dom/",
+    "test": "run-s test:*"
   },
   "devDependencies": {
     "@faker-js/faker": "10.0.0",
@@ -18,6 +19,7 @@
     "@types/bun": "^1.2.21",
     "global-jsdom": "26.0.0",
     "jsdom": "26.1.0",
+    "npm-run-all2": "8.0.4",
     "playwright-ctrf-json-reporter": "0.0.23"
   },
   "peerDependencies": {
