@@ -25,22 +25,23 @@ bun run test  # Run all tests
 
 ### Application (`src/`)
 
-| Directory/File             | Description                                 |
-| -------------------------- | ------------------------------------------- |
-| **`subscription/`**        | Contains all subscription-related behavior. |
-| **`plumbing/`**            | Application and framework configurations.   |
-| **`gateway/`**             | Contains all gateways to dependencies.      |
-| **`web/`**                 | General web pages, components, and styles.  |
-| **`server-definition.ts`** | Route definitions and orchestration.        |
-| **`server.ts`**            | Main server file to run the application.    |
+| Directory/File      | Description                                 |
+| ------------------- | ------------------------------------------- |
+| **`subscription/`** | Contains all subscription-related behavior. |
+| **`plumbing/`**     | Application and framework configurations.   |
+| **`gateway/`**      | Contains all gateways to dependencies.      |
+| **`web/`**          | General web pages, components, and styles.  |
+| **`routes.ts`**     | Route definitions and orchestration.        |
+| **`server.ts`**     | Main server file to run the application.    |
 
 ### Testing (`test/`)
 
-| Directory/File | Description                           |
-| -------------- | ------------------------------------- |
-| **`dom/`**     | Tests requiring DOM access.           |
-| **`non-dom/`** | Tests that do not require DOM access. |
-| **`_setup/`**  | Framework setup files.                |
+| Directory/File    | Description                                   |
+| ----------------- | --------------------------------------------- |
+| **`dom/`**        | Tests requiring DOM access.                   |
+| **`non-dom/`**    | Tests that do not require DOM access.         |
+| **`closed-box/`** | Tests that emulates a user through a browser. |
+| **`_setup/`**     | Framework setup files.                        |
 
 The separation of `dom` and `non-dom` tests simplifies configuration. Refer to
 the `test:` tasks in [package.json](../package.json) for details on usage.
