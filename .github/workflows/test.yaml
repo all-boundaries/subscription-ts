@@ -76,6 +76,7 @@ jobs:
         run: bun build --compile --outfile=subscription src/server.ts
 
       - name: Create release
+        id: createrelease
         uses: softprops/action-gh-release@v2
         with:
           name: ${{ steps.calver.outputs.tag }}
@@ -83,3 +84,10 @@ jobs:
           files: subscription
           body: The latest version of the Subscription app
           generate_release_notes: true
+
+      - name: Add release URL as a note
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git notes add -m "Release URL: ${{steps.createrelease.outputs.url}}" $GITHUB_SHA
+          git push origin refs/notes/commits
