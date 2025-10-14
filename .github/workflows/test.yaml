@@ -71,11 +71,17 @@ jobs:
       - name: Create artifact
         run: bun build --compile --outfile=subscription src/server.ts
 
-      - name: Create Release
+      - name: Generate version
+        id: calver
+        uses: jterral/calendar-versioning-action@v1
+        with:
+          tag-push: "true"
+
+      - name: Create release
         uses: softprops/action-gh-release@v2
         with:
-          name: latest
-          tag_name: latest
+          name: ${{ steps.calver.outputs.tag }}
+          tag_name: ${{ steps.calver.outputs.tag }}
           files: subscription
           overwrite_files: true
           make_latest: "true"
