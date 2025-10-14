@@ -83,6 +83,4 @@ jobs:
           name: ${{ steps.calver.outputs.tag }}
           tag_name: ${{ steps.calver.outputs.tag }}
           files: subscription
-          overwrite_files: true
-          make_latest: "true"
           body: The latest version of the Subscription app
