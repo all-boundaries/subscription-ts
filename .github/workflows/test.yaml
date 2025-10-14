@@ -59,6 +59,10 @@ jobs:
     needs: [test]
 
     steps:
+      - name: Generate version
+        id: calver
+        uses: jterral/calendar-versioning-action@v1
+
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -67,12 +71,6 @@ jobs:
 
       - name: Install dependencies
         run: bun install
-
-      - name: Generate version
-        id: calver
-        uses: jterral/calendar-versioning-action@v1
-        with:
-          tag-push: "true"
 
       - name: Create artifact
         run: bun build --compile --outfile=subscription src/server.ts
