@@ -68,14 +68,14 @@ jobs:
       - name: Install dependencies
         run: bun install
 
-      - name: Create artifact
-        run: bun build --compile --outfile=subscription src/server.ts
-
       - name: Generate version
         id: calver
         uses: jterral/calendar-versioning-action@v1
         with:
           tag-push: "true"
+
+      - name: Create artifact
+        run: bun build --compile --outfile=subscription src/server.ts
 
       - name: Create release
         uses: softprops/action-gh-release@v2
@@ -84,3 +84,4 @@ jobs:
           tag_name: ${{ steps.calver.outputs.tag }}
           files: subscription
           body: The latest version of the Subscription app
+          generate_release_notes: true
