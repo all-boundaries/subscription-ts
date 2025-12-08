@@ -9,11 +9,14 @@ import {
 } from "@pact-foundation/pact";
 import ky from "ky";
 import { like } from "@pact-foundation/pact/src/dsl/matchers";
-import {
-  productDetailsFor,
-  allProducts,
-} from "../../src/gateway/product-catalog-gateway";
 import type { Product } from "../../src/subscription/plans";
+import { mock } from "bun:test";
+
+mock.module("../../src/plumbling/env-config", () => ({
+  envConfig: {
+    PRODUCT_CATALOG_GATEWAY: "remote",
+  },
+}));
 
 const provider = new PactV4({
   dir: resolve(process.cwd(), "pacts"),
@@ -38,6 +41,9 @@ const provider = new PactV4({
  */
 describe("GET /products/:id", () => {
   it("returns info about a product", async () => {
+    const { productDetailsFor } =
+      await import("../../src/gateway/product-catalog-gateway");
+
     const response: Product = {
       id: "prd-2nuschh",
       name: "product 1",
@@ -73,6 +79,9 @@ describe("GET /products/:id", () => {
   });
 
   it("returns all products", async () => {
+    const { allProducts } =
+      await import("../../src/gateway/product-catalog-gateway");
+
     const response: Array<Product> = [
       {
         id: "prd-2nuschh",
@@ -114,6 +123,9 @@ describe("GET /products/:id", () => {
   });
 
   it("returns empty when retrieving all products fails", async () => {
+    const { allProducts } =
+      await import("../../src/gateway/product-catalog-gateway");
+
     const response = {
       type: "probs/something-went-wrong",
       title: "We do not know what happened, please try again",

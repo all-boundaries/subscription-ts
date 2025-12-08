@@ -7,6 +7,7 @@ export function aPlan(overwrites?: Partial<Plan>): Plan {
     id: faker.helpers.fromRegExp("[a-d0-6]{5,10}"),
     name: faker.commerce.productName(),
     description: faker.commerce.productDescription(),
+    characteristics: faker.helpers.uniqueArray(faker.food.adjective, 3),
     ...overwrites,
   };
 }

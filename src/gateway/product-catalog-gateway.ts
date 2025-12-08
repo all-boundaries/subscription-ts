@@ -1,52 +1,41 @@
-import ky from "ky";
+import type { KyInstance } from "ky";
 import { envConfig } from "../plumbling/env-config";
-import z from "zod";
 import type { Product } from "../subscription/plans";
+import {
+  remoteAllProducts,
+  remoteProductDetailsFor,
+} from "./product-catalog-remote-gateway";
+import {
+  staticAllProducts,
+  staticProductDetailsFor,
+} from "./product-catalog-static-gateway";
 
-const productResponseSchema = z.object({
-  id: z.string(),
-  name: z.string(),
-  description: z.string(),
-  status: z.string(),
-  specs: z.array(z.string()),
-  tags: z.array(z.string()),
-});
-
-type ProductResponse = z.infer<typeof productResponseSchema>;
-
-const productCatalogClient = ky.create({
-  prefixUrl: `${envConfig.SVC_PRODUCT_CATALOG_URL}/products`,
-});
-
-async function productDetailsFor(
+type ProductDetailsForFn = (
   id: string,
-  client = productCatalogClient,
-): Promise<Product> {
-  return client
-    .get(id)
-    .json()
-    .then(productResponseSchema.parse)
-    .then(responseToProduct);
+  client?: KyInstance,
+) => Promise<Product>;
+type AllProductsFn = (client?: KyInstance) => Promise<Array<Product>>;
+
+function remoteOrStatic<T>(remoteGateway: T, staticGateway: T) {
+  if (envConfig.PRODUCT_CATALOG_GATEWAY === "remote") {
+    return remoteGateway;
+  }
+  return staticGateway;
 }
 
-async function allProducts(
-  client = productCatalogClient,
-): Promise<Array<Product>> {
-  return client
-    .get("")
-    .json<{ data: Array<ProductResponse> }>()
-    .then((json) => json.data.map((p) => productResponseSchema.parse(p)))
-    .then((response) => response.map(responseToProduct))
-    .catch(() => []);
-}
+const productDetailsFor = remoteOrStatic<ProductDetailsForFn>(
+  remoteProductDetailsFor,
+  staticProductDetailsFor,
+);
 
-function responseToProduct(response: ProductResponse): Product {
-  return {
-    id: response.id,
-    name: response.name,
-    description: response.description,
-    characteristics: [...response.specs, ...response.tags],
-  };
-}
+const allProducts = remoteOrStatic<AllProductsFn>(
+  remoteAllProducts,
+  staticAllProducts,
+);
 
-export { productDetailsFor, allProducts };
+export {
+  type AllProductsFn,
+  type ProductDetailsForFn,
+  allProducts,
+  productDetailsFor,
+};

@@ -1,10 +1,14 @@
+import { allProducts } from "../../gateway/product-catalog-gateway";
 import type { Plan } from "../plans";
 
-export function Plans({ plans }: { plans: Array<Plan> }) {
-  return <section class="grid">{plans.map((p) => PlanCard(p))}</section>;
+export async function Plans({ plans }: { plans: Array<Plan> }) {
+  const plansWithProducts = (await Promise.allSettled(plans.map(PlanCard)))
+    .filter((r) => r.status === "fulfilled")
+    .map((r) => r.value);
+  return <section class="grid">{plansWithProducts}</section>;
 }
 
-function PlanCard(plan: Plan) {
+async function PlanCard(plan: Plan) {
   return (
     <article>
       <form

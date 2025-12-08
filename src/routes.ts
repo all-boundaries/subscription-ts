@@ -24,7 +24,7 @@ async function styles() {
 
 async function displayAllPlans() {
   const plans = allPlans();
-  return new Response(Layout({ children: Plans({ plans }) }), {
+  return new Response(Layout({ children: await Plans({ plans }) }), {
     headers: {
       "content-type": "text/html",
     },

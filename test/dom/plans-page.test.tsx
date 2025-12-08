@@ -21,12 +21,12 @@ import { aPlan } from "../builders";
  * 4. Assertions check if the data is displayed in the appropriate place.
  */
 describe("component: plans", () => {
-  it("renders the plan information for subscription with action to subscribe", () => {
+  it("renders the plan information for subscription with action to subscribe", async () => {
     const plan1 = aPlan();
     const plan2 = aPlan();
     const plans = [plan1, plan2];
 
-    const component = Plans({ plans });
+    const component = await Plans({ plans });
     render(component);
 
     const renderedPlans = screen.getAllByRole("article");
